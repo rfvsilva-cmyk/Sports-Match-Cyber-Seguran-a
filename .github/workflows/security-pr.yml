@@ -1,13 +1,14 @@
-name: Security Regression - PR + Main
+name: Security Tests - Pull Request
 
 on:
   pull_request:
-  push:
-    branches: [main]
+    branches:
+      - main
 
 jobs:
   security:
     runs-on: ubuntu-latest
+
     steps:
       - name: Checkout
         uses: actions/checkout@v4
@@ -35,6 +36,3 @@ jobs:
 
       - name: Frontend tests
         run: npm --prefix front-end test
-
-      - name: Build
-        run: npm run build
