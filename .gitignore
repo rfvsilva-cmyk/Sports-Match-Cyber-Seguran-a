@@ -1,0 +1,11 @@
+node_modules/
+dist/
+coverage/
+test-results/
+playwright-report/
+public/
+!front-end/public/
+.env
+.env.local
+
+supabase/.temp/

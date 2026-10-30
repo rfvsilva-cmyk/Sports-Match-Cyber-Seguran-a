@@ -1,0 +1,33 @@
+name: CI Build
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout do código
+        uses: actions/checkout@v4
+
+      - name: Configurar Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: npm
+
+      - name: Instalar dependências do backend
+        run: npm ci
+
+      - name: Instalar dependências do frontend
+        run: npm ci
+        working-directory: front-end
+
+      - name: Executar testes de segurança
+        run: npm run test:security
+
+      - name: Executar build
+        run: npm run build

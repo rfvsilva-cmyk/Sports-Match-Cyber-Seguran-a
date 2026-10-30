@@ -1,0 +1,40 @@
+name: Security Tests
+
+on:
+  pull_request:
+  push:
+    branches: [main]
+
+jobs:
+  security:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup Node
+        uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: npm
+          cache-dependency-path: |
+            package-lock.json
+            front-end/package-lock.json
+
+      - name: Install backend dependencies
+        run: npm ci
+
+      - name: Install frontend dependencies
+        run: npm --prefix front-end ci
+
+      - name: Security regression tests
+        run: npm run test:security
+
+      - name: Backend unit tests
+        run: npm run test:unit
+
+      - name: Frontend tests
+        run: npm --prefix front-end test
+
+      - name: Build
+        run: npm run build

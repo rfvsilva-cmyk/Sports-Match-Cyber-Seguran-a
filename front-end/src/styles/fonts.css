@@ -1,0 +1,18 @@
+:root {
+ --brand-font: "Century Gothic", "Century Gothic Paneuropean", Avenir, Montserrat, Arial, sans-serif;
+}
+
+html,
+body,
+button,
+input,
+textarea,
+select {
+ font-family: var(--brand-font);
+}
+
+em,
+i,
+.italic {
+ font-style: italic;
+}
